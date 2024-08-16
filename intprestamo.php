@@ -56,7 +56,7 @@ $result = $stmt->get_result();
         
         <!-- Botón de Regresar con el mismo estilo que los botones de acción -->
         <div class="btn-group btn-group-sm mb-3" role="group">
-            <a href="interfazprincipal.php" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Regresar</a>
+            <a href="interfaz_empleados.php" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Regresar</a>
         </div>
         
         <!-- Formulario de búsqueda -->

@@ -45,7 +45,7 @@ $result = $conn->query($query);
                             <div class="btn-group btn-group-sm" role="group">
                             </div>
                             <div class="btn-group btn-group-sm" role="group">
-                                <a href="interfazprincipal.php" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Regresar</a>
+                                <a href="interfaz_empleados.php" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Regresar</a>
                             </div>
                         </div>
                         <table class="table table-striped">
