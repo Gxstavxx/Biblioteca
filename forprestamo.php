@@ -1,43 +1,77 @@
+<?php
+include 'conexion.php';
+
+// Obtener la lista de clientes
+$clientesQuery = "SELECT id, nombres_cli, apellidos_cli FROM Clientes";
+$clientesResult = $conn->query($clientesQuery);
+
+// Obtener la lista de libros
+$librosQuery = "SELECT id, nombre FROM Libros";
+$librosResult = $conn->query($librosQuery);
+
+// Verificar si hay un mensaje de error
+$errorMsg = isset($_GET['error']) && $_GET['error'] === 'libro_prestado' ? 'El libro ya ha sido prestado.' : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrar Libro</title>
-    <link rel="stylesheet" href="estilos1.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Registrar Préstamo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body class="background2">
-    <center>
-        <div id="B2" class="card col-sm-3" style="margin-top: 6%;">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg"><b>Registro de Libro</b></p>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-center">Registro de Préstamo</h3>
                 
-                <form id="formLibro" action="forintlibros.php" method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre del Libro" required>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" name="descripcion" class="form-control" placeholder="Ingrese una Descripción" required>
-                    </div>
-                    
-                    <div class="row justify-content-center">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-block btn-outline-primary btn-sm">Guardar</button><br>
-                        </div>
-                    </div>
-                </form>
+                <!-- Mostrar mensaje de error -->
+                <?php if ($errorMsg): ?>
+                    <div class="alert alert-danger"><?php echo $errorMsg; ?></div>
+                <?php endif; ?>
 
-                <form action="intLibros.php">
-                    <div class="col-6">
-                        <br><button type="submit" class="btn btn-primary btn-block"><i class="fas fa-arrow-left"></i> Regresar</button>
-                        <br>
+                <form action="forintprestamo.php" method="post">
+                    <div class="form-group mb-3">
+                        <label for="fk_cliente">Cliente</label>
+                        <select name="fk_cliente" class="form-control" required>
+                            <option value="">Seleccione un Cliente</option>
+                            <?php while ($cliente = $clientesResult->fetch_assoc()) { ?>
+                                <option value="<?php echo $cliente['id']; ?>">
+                                    <?php echo $cliente['nombres_cli'] . ' ' . $cliente['apellidos_cli']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="fk_libro">Libro</label>
+                        <select name="fk_libro" class="form-control" required>
+                            <option value="">Seleccione un Libro</option>
+                            <?php while ($libro = $librosResult->fetch_assoc()) { ?>
+                                <option value="<?php echo $libro['id']; ?>">
+                                    <?php echo $libro['nombre']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="fecha_prestamo">Fecha de Préstamo</label>
+                        <input type="date" name="fecha_prestamo" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="fecha_devolucion">Fecha de Devolución</label>
+                        <input type="date" name="fecha_devolucion" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Registrar Préstamo</button>
                 </form>
+                <a href="intPrestamo.php" class="btn btn-secondary btn-block mt-2">Regresar</a>
             </div>
         </div>
-    </center>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

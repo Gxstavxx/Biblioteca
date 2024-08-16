@@ -1,41 +1,40 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'conexion.php'; // Asegúrate de que este archivo contiene la conexión a la base de datos
+    include 'conexion.php';
 
     // Capturar datos del formulario
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
+    $fk_cliente = $_POST['fk_cliente'];
+    $fk_libro = $_POST['fk_libro'];
+    $fecha_prestamo = $_POST['fecha_prestamo'];
+    $fecha_devolucion = $_POST['fecha_devolucion'];
 
-    // Verificar si el nombre del libro ya existe en la tabla de libros
-    $check_sql = "SELECT * FROM Libros WHERE nombre = ?";
-    $check_stmt = $conn->prepare($check_sql);
-    $check_stmt->bind_param("s", $nombre);
-    $check_stmt->execute();
-    $result = $check_stmt->get_result();
+    // Verificar si el libro ya está prestado
+    $verificarQuery = "SELECT * FROM Prestamo WHERE fk_libro = ? AND fecha_devolucion IS NULL";
+    $stmt = $conn->prepare($verificarQuery);
+    $stmt->bind_param("s", $fk_libro);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // El nombre del libro ya existe
-        $errorMsg = "El nombre del libro ya está registrado. Por favor, use otro.";
-        include 'forlibros.php'; // Asegúrate de que este archivo contiene el formulario HTML de libros
+        // Libro ya prestado, redirigir con mensaje
+        header('Location: forprestamo.php?error=libro_prestado');
+        exit();
     } else {
-        // Insertar nuevo registro en la tabla libros
-        $sql = "INSERT INTO Libros (nombre, descripcion) 
-                VALUES (?, ?)";
+        // Insertar nuevo registro en la tabla Prestamo
+        $sql = "INSERT INTO Prestamo (fk_cliente, fk_libro, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $nombre, $descripcion);
+        $stmt->bind_param("ssss", $fk_cliente, $fk_libro, $fecha_prestamo, $fecha_devolucion);
 
         if ($stmt->execute()) {
-            header('Location: intLibros.php'); // Redirigir a la interfaz principal después de un registro exitoso
+            header('Location: intprestamo.php'); // Redirigir a la interfaz principal después de un registro exitoso
             exit();
         } else {
-            $errorMsg = "Error al registrar: " . $stmt->error;
-            include 'forlibros.php'; // Mostrar el formulario con el mensaje de error
+            $errorMsg = "Error al registrar el préstamo: " . $stmt->error;
+            include 'forprestamo.php'; // Mostrar el formulario con el mensaje de error
         }
-
-        $stmt->close();
     }
 
-    $check_stmt->close();
+    $stmt->close();
     $conn->close();
 }
 ?>

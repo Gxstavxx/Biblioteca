@@ -2,7 +2,7 @@
 include "conexion.php";
 
 // Realizar la consulta SQL para obtener todos los registros
-$query = "SELECT id, nombre, descripcion FROM Libros";
+$query = "SELECT id, nombre, descripcion,cantidad FROM Libros";
 $result = $conn->query($query);
 ?>
 
@@ -25,19 +25,26 @@ $result = $conn->query($query);
     </style>
 </head>
 <body>
+    
     <div class="container">
+        
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center mb-4">Registros de Libros</h1>
                 <a href="forlibros.php" class="btn btn-block btn-outline-info btn-sm">¿Deseas Registrar un Nuevo Libro?</a>
                 <div class="card">
+                    
                     <div class="card-body">
+                    <div class="btn-group btn-group-sm" role="group">
+                                <a href="interfazprincipal.php" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Regresar</a>
+                            </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Descripción</th>
+                                    <th scope="col">Cantidad</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -50,6 +57,8 @@ $result = $conn->query($query);
                                         <td><?php echo $dat->id; ?></td>
                                         <td><?php echo $dat->nombre; ?></td>
                                         <td><?php echo $dat->descripcion; ?></td>
+                                        <td><?php echo $dat->cantidad; ?></td>
+
                                         <td>
                                             <a href="editarLibro.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
                                             <a href="eliminarLibro.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>

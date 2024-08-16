@@ -1,9 +1,18 @@
 <?php
 include "conexion.php";
 
-// Realizar la consulta SQL para obtener todos los registros
-$query = "SELECT id, nombre, descripcion FROM Libros";
+// Realizar la consulta SQL para obtener todos los préstamos
+$query = "SELECT Prestamo.id, 
+                 Clientes.nombres_cli, 
+                 Clientes.apellidos_cli, 
+                 Libros.nombre AS libro, 
+                 Prestamo.fecha_prestamo, 
+                 Prestamo.fecha_devolucion
+          FROM Prestamo
+          INNER JOIN Clientes ON Prestamo.fk_cliente = Clientes.id
+          INNER JOIN Libros ON Prestamo.fk_libro = Libros.id";
 $result = $conn->query($query);
+
 ?>
 
 <!DOCTYPE html>
@@ -11,69 +20,58 @@ $result = $conn->query($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz Libros</title>
+    <title>Lista de Préstamos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        .container {
-            padding-top: 50px;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center mb-4">Registros de Libros</h1>
-                <a href="forlibros.php" class="btn btn-block btn-outline-info btn-sm">¿Deseas Registrar un Nuevo Libro?</a>
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body">
-                                <?php
-                                if ($result && $result->num_rows > 0) {
-                                    while ($dat = $result->fetch_object()) {
-                                ?>
-                                    <tr>
-                                        <td><?php echo $dat->id; ?></td>
-                                        <td><?php echo $dat->nombre; ?></td>
-                                        <td><?php echo $dat->descripcion; ?></td>
-                                        <td>
-                                            <a href="editarLibro.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
-                                            <a href="eliminarLibro.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php
-                                    }
-                                    $result->close(); // Liberar el conjunto de resultados
-                                } else {
-                                    echo "<tr><td colspan='4'>No hay registros encontrados</td></tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Préstamos Registrados</h2>
+        
+        <!-- Botón para registrar un nuevo préstamo -->
+        <a href="forprestamo.php" class="btn btn-info mb-3">Registrar un Nuevo Préstamo</a>
+        
+        <!-- Botón de Regresar con el mismo estilo que los botones de acción -->
+        <div class="btn-group btn-group-sm mb-3" role="group">
+            <a href="interfazprincipal.php" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Regresar</a>
         </div>
+        
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Libro</th>
+                    <th>Fecha de Préstamo</th>
+                    <th>Fecha de Devolución</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['nombres_cli'] . ' ' . $row['apellidos_cli']; ?></td>
+                        <td><?php echo $row['libro']; ?></td>
+                        <td><?php echo $row['fecha_prestamo']; ?></td>
+                        <td><?php echo $row['fecha_devolucion']; ?></td>
+                        <td>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No hay préstamos registrados</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 
-<?php $conn->close(); ?>
+<?php
+$conn->close();
+?>

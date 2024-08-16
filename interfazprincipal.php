@@ -109,7 +109,7 @@
                     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div style="margin: 6px 6px 6px 80%;" id="divBtnVerCursos4117">
-                    <a href="Grado.php" class="btn btn-info btn-circle">
+                    <a href="intprestamo.php" class="btn btn-info btn-circle">
                         <i class="material-icons">ir</i> 
                     </a>
                 </div>
@@ -130,7 +130,7 @@
                     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div style="margin: 6px 6px 6px 80%;" id="divBtnVerCursos4117">
-                    <a href="Cursos.php" class="btn btn-info btn-circle">
+                    <a href="intprestamo.php" class="btn btn-info btn-circle">
                         <i class="material-icons">ir</i> 
                     </a>
                 </div>

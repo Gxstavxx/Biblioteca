@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturar datos del formulario
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
+    $cantidad = $_POST['cantidad'];
 
     // Verificar si el nombre del libro ya existe en la tabla de libros
     $check_sql = "SELECT * FROM Libros WHERE nombre = ?";

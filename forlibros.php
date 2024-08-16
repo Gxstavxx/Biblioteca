@@ -20,6 +20,9 @@
                     <div class="input-group mb-3">
                         <input type="text" name="descripcion" class="form-control" placeholder="Ingrese una Descripción" required>
                     </div>
+                    <div class="input-group mb-3">
+                        <input type="number" name="cantidad" class="form-control" placeholder="Ingrese la Cantidad" required>
+                    </div>
                     
                     <div class="row justify-content-center">
                         <div class="col-6">
