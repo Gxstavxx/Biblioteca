@@ -2,12 +2,10 @@
 include "conexion.php";
 
 // Realizar la consulta SQL para obtener todos los registros
-$query = "SELECT id, nombres, apellidos, profesion, nickname, correo, contraseña FROM prof"; // Ajusta según la estructura de tu tabla
+$query = "SELECT id, nombres, apellidos, edad, direccion, tel, identificacion, cargo  FROM empleados"; // Ajusta según la estructura de tu tabla
 $result = $conn->query($query);
 
-// Realizar la consulta SQL para obtener las profesiones distintas
-$queryProfesion = "SELECT DISTINCT profesion FROM prof";
-$resultProfesion = $conn->query($queryProfesion);
+
 ?>
 
 <!DOCTYPE html>
@@ -39,24 +37,15 @@ $resultProfesion = $conn->query($queryProfesion);
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center mb-4">Registros de Docentes</h1>
-                <a href="registrarpro.php" class="btn btn-block btn-outline-info btn-sm">¿Deseas Registrar un Nuevo Docente?</a>
+                <h1 class="text-center mb-4">Registros de Empleados</h1>
+                <a href="forempleados.php" class="btn btn-block btn-outline-info btn-sm">¿Deseas Registrar un Nuevo Empleado?</a>
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="btn-group btn-group-sm" role="group">
-                                <a href="interfazprincipal.php" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Regresar</a>
-                                <a href="cerrar.php" class="btn btn-danger">Cerrar Sesión</a>
                             </div>
-                            <!-- Campos de búsqueda -->
-                            <div class="d-flex">
-                                <input type="text" id="search" class="form-control" placeholder="Buscar...">
-                                <select id="searchProfesion" class="form-control ml-2">
-                                    <option value="">Seleccionar Profesion</option>
-                                    <?php while ($row = $resultProfesion->fetch_assoc()) { ?>
-                                        <option value="<?php echo $row['profesion']; ?>"><?php echo $row['profesion']; ?></option>
-                                    <?php } ?>
-                                </select>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="interfazprincipal.php" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Regresar</a>
                             </div>
                         </div>
                         <table class="table table-striped">
@@ -65,10 +54,11 @@ $resultProfesion = $conn->query($queryProfesion);
                                     <th scope="col">#</th>
                                     <th scope="col">Nombres</th>
                                     <th scope="col">Apellidos</th>
-                                    <th scope="col">Profesion</th>
-                                    <th scope="col">NickName</th>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">Contraseña</th>
+                                    <th scope="col">Edad</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col">Identificacion</th>
+                                    <th scope="col">Cargo</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -81,10 +71,12 @@ $resultProfesion = $conn->query($queryProfesion);
                                         <td><?php echo $dat->id; ?></td>
                                         <td><?php echo $dat->nombres; ?></td>
                                         <td><?php echo $dat->apellidos; ?></td>
-                                        <td><?php echo $dat->profesion; ?></td>
-                                        <td><?php echo $dat->nickname; ?></td>
-                                        <td><?php echo $dat->correo; ?></td>
-                                        <td><?php echo $dat->contraseña; ?></td>
+                                        <td><?php echo $dat->edad; ?></td>
+                                        <td><?php echo $dat->direccion; ?></td>
+                                        <td><?php echo $dat->tel; ?></td>
+                                        <td><?php echo $dat->identificacion; ?></td>
+                                        <td><?php echo $dat->cargo; ?></td>
+
                                         <td>
                                             <a href="editar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
                                             <a href="eliminar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>

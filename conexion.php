@@ -1,6 +1,6 @@
 <?php 
 $sn = "localhost";
-$db ="colegio";
+$db ="Biblio";
 $user ="root";
 $pass = "";
 

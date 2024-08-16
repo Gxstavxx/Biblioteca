@@ -13,35 +13,32 @@
     <center>
         <div id="B2" class="card col-sm-3" style="margin-top: 6%;">
             <div class="card-body login-card-body">
-                <p class="login-box-msg"><b>Registro de Profesor</b></p>
-                
-                <div class="custom-controls-stacked row text-center pb-3">
-                    <div class="custom-control custom-radio col-md-4 text-right">
-                        <input id="tipoBusqueda2" name="tipoBusqueda" value="2" type="radio" class="custom-control-input tipoBusqueda" checked="checked">
-                        <label for="tipoBusqueda2" class="custom-control-label">Profesor</label>
-                    </div>
-                </div>
+                <p class="login-box-msg"><b>Registro de Empleado</b></p>
+            
 
                 <!-- Formulario Profesor -->
-                <form id="formProfesor" action="registropro.php" method="post">
+                <form id="formProfesor" action="forintempleados.php" method="post">
                     <input type="hidden" name="tipo" value="profesor">
                     <div class="input-group mb-3">
-                        <input type="text" name="nombre" class="form-control" placeholder="Ingrese sus Nombres" required>
+                        <input type="text" name="nombres" class="form-control" placeholder="Ingrese sus Nombres" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="apellido" class="form-control" placeholder="Fecha" required>
+                        <input type="text" name="apellidos" class="form-control" placeholder="Ingrese sus Apellidos" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="profesion" class="form-control" placeholder="Direccion" required>
+                        <input type="date" name="fecha" class="form-control" placeholder="Fecha" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="direccion" class="form-control" placeholder="Direccion" required>
                     </div>
        
                     <div class="input-group mb-3">
-                        <input type="email" name="correo" class="form-control" placeholder="Telefono" required>
+                        <input type="number" name="telefono" class="form-control" placeholder="Telefono" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="contraseña" class="form-control" placeholder="Identificacion" required>
+                        <input type="number" name="identificacion" class="form-control" placeholder="Identificacion" required>
                     </div>
-                    <input type="password" name="contraseña" class="form-control" placeholder="Cargo" required>
+                    <input type="text" name="cargo" class="form-control" placeholder="Cargo" required>
 
                     <div class="row justify-content-center">
                         <div class="col-6">
