@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturar datos del formulario
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
-    $cantidad = $_POST['cantidad'];
+    $cantidad = $_POST['cantidad']; // Capturar la cantidad
 
     // Verificar si el nombre del libro ya existe en la tabla de libros
     $check_sql = "SELECT * FROM Libros WHERE nombre = ?";
@@ -20,10 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include 'forlibros.php'; // Asegúrate de que este archivo contiene el formulario HTML de libros
     } else {
         // Insertar nuevo registro en la tabla libros
-        $sql = "INSERT INTO Libros (nombre, descripcion) 
-                VALUES (?, ?)";
+        $sql = "INSERT INTO Libros (nombre, descripcion, cantidad) VALUES (?, ?, ?)"; // Agregar la cantidad al SQL
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $nombre, $descripcion);
+        $stmt->bind_param("sss", $nombre, $descripcion, $cantidad); // Vincular la cantidad al statement
 
         if ($stmt->execute()) {
             header('Location: intLibros.php'); // Redirigir a la interfaz principal después de un registro exitoso
@@ -39,4 +38,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_stmt->close();
     $conn->close();
 }
+
 ?>
