@@ -77,8 +77,8 @@ $result = $conn->query($query);
                                         <td><?php echo $dat->identificacion; ?></td>
                                     
                                         <td>
-                                            <a href="editar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
-                                            <a href="eliminar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="editarclientes.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
+                                            <a href="eliminarclientes.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 <?php

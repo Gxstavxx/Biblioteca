@@ -60,8 +60,8 @@ $result = $conn->query($query);
                                         <td><?php echo $dat->cantidad; ?></td>
 
                                         <td>
-                                            <a href="editarLibro.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
-                                            <a href="eliminarLibro.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="editarlibros.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
+                                            <a href="eliminarlibros.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 <?php

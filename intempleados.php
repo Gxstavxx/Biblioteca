@@ -2,10 +2,8 @@
 include "conexion.php";
 
 // Realizar la consulta SQL para obtener todos los registros
-$query = "SELECT id, nombres, apellidos, edad, direccion, tel, identificacion, cargo  FROM empleados"; // Ajusta según la estructura de tu tabla
+$query = "SELECT id, nombres, apellidos, edad, direccion, tel, identificacion, cargo  FROM empleados"; 
 $result = $conn->query($query);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +24,7 @@ $result = $conn->query($query);
         }
         .btn-group .form-control {
             margin-left: 10px;
-            width: 200px; /* Ajusta este valor según sea necesario */
+            width: 200px;
         }
         .d-flex {
             align-items: center;
@@ -42,8 +40,7 @@ $result = $conn->query($query);
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
-                            <div class="btn-group btn-group-sm" role="group">
-                            </div>
+                            <div class="btn-group btn-group-sm" role="group"></div>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="interfazprincipal.php" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Regresar</a>
                             </div>
@@ -76,17 +73,16 @@ $result = $conn->query($query);
                                         <td><?php echo $dat->tel; ?></td>
                                         <td><?php echo $dat->identificacion; ?></td>
                                         <td><?php echo $dat->cargo; ?></td>
-
                                         <td>
-                                            <a href="editar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
-                                            <a href="eliminar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="editarempleados.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
+                                            <a href="eliminarempleados.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 <?php
                                     }
                                     $result->close(); // Liberar el conjunto de resultados
                                 } else {
-                                    echo "<tr><td colspan='8'>No hay registros encontrados</td></tr>";
+                                    echo "<tr><td colspan='9'>No hay registros encontrados</td></tr>";
                                 }
                                 ?>
                             </tbody>
