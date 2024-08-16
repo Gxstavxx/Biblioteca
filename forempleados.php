@@ -29,25 +29,20 @@
                         <input type="text" name="nombre" class="form-control" placeholder="Ingrese sus Nombres" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="apellido" class="form-control" placeholder="Ingrese sus Apellidos" required>
+                        <input type="text" name="apellido" class="form-control" placeholder="Fecha" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="profesion" class="form-control" placeholder="Ingrese su Profesion" required>
+                        <input type="text" name="profesion" class="form-control" placeholder="Direccion" required>
+                    </div>
+       
+                    <div class="input-group mb-3">
+                        <input type="email" name="correo" class="form-control" placeholder="Telefono" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="nickname" id="nickname" class="form-control" placeholder="Usuario" required onblur="addProfToNickname(this)">
+                        <input type="password" name="contraseña" class="form-control" placeholder="Identificacion" required>
                     </div>
-                    <?php if (isset($errorMsg)): ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo htmlspecialchars($errorMsg); ?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="input-group mb-3">
-                        <input type="email" name="correo" class="form-control" placeholder="Correo" required>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
-                    </div>
+                    <input type="password" name="contraseña" class="form-control" placeholder="Cargo" required>
+
                     <div class="row justify-content-center">
                         <div class="col-6">
                             <button type="submit" class="btn btn-block btn-outline-primary btn-sm">Guardar</button><br>
