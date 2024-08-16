@@ -27,7 +27,7 @@
                 } ?>
 
                 <p style=" color: white;"class="login-box-msg"><b>Login</b></p>
-                <form action="revisar.php" method="post">
+                <form action="intlogin.php" method="post">
 
                 <label class="form-label" for="usuario" style=" color: white;">Usuario:</label>
                     <div class="input-group mb-3">

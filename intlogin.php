@@ -16,14 +16,36 @@ function verificarCredencialesAdmin($nickname, $contraseña) {
     return false;
 }
 
-// Verificar credenciales de administrador
+// Función para verificar las credenciales de trabajador
+function verificarCredencialesTrabajador($nickname, $contraseña) {
+    $trabajadores = array(
+        array("nickname" => "gustavo-trabajador", "contraseña" => md5("38331665"))
+    );
+
+    foreach ($trabajadores as $trabajador) {
+        if ($trabajador['nickname'] === $nickname && $trabajador['contraseña'] === $contraseña) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Verificar credenciales
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nickname = $_POST['nickname'];
     $contraseña = md5($_POST['contraseña']); // Convertir la contraseña a MD5 para compararla
 
+    // Verificar si es administrador
     if (verificarCredencialesAdmin($nickname, $contraseña)) {
         $_SESSION['user'] = array("nickname" => $nickname);
         header("Location: interfazprincipal.php");
+        exit();
+    }
+
+    // Verificar si es trabajador
+    if (verificarCredencialesTrabajador($nickname, $contraseña)) {
+        $_SESSION['user'] = array("nickname" => $nickname);
+        header("Location: interfaz_empleados.php");
         exit();
     }
 
