@@ -10,7 +10,14 @@ $librosQuery = "SELECT id, nombre FROM Libros";
 $librosResult = $conn->query($librosQuery);
 
 // Verificar si hay un mensaje de error
-$errorMsg = isset($_GET['error']) && $_GET['error'] === 'libro_prestado' ? 'El libro ya ha sido prestado.' : '';
+$errorMsg = '';
+if (isset($_GET['error'])) {
+    if ($_GET['error'] === 'libro_no_disponible') {
+        $errorMsg = 'El libro no está disponible. No hay copias disponibles.';
+    } elseif ($_GET['error'] === 'error_registro') {
+        $errorMsg = 'Hubo un problema al registrar el préstamo. Intente de nuevo.';
+    }
+}
 ?>
 
 <!DOCTYPE html>

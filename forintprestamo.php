@@ -1,40 +1,48 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'conexion.php';
+include 'conexion.php';
 
-    // Capturar datos del formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fk_cliente = $_POST['fk_cliente'];
     $fk_libro = $_POST['fk_libro'];
     $fecha_prestamo = $_POST['fecha_prestamo'];
     $fecha_devolucion = $_POST['fecha_devolucion'];
 
-    // Verificar si el libro ya está prestado
-    $verificarQuery = "SELECT * FROM Prestamo WHERE fk_libro = ? AND fecha_devolucion IS NULL";
-    $stmt = $conn->prepare($verificarQuery);
-    $stmt->bind_param("s", $fk_libro);
+    // Verificar la cantidad disponible del libro seleccionado
+    $cantidadQuery = "SELECT cantidad FROM Libros WHERE id = ?";
+    $stmt = $conn->prepare($cantidadQuery);
+    $stmt->bind_param("i", $fk_libro);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->bind_result($cantidad);
+    $stmt->fetch();
+    $stmt->close();
 
-    if ($result->num_rows > 0) {
-        // Libro ya prestado, redirigir con mensaje
-        header('Location: forprestamo.php?error=libro_prestado');
-        exit();
-    } else {
-        // Insertar nuevo registro en la tabla Prestamo
-        $sql = "INSERT INTO Prestamo (fk_cliente, fk_libro, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $fk_cliente, $fk_libro, $fecha_prestamo, $fecha_devolucion);
+    if ($cantidad > 0) {
+        // La cantidad es mayor que 0, registrar el préstamo y actualizar la cantidad
+        $insertQuery = "INSERT INTO prestamo (fk_cliente, fk_libro, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("iiss", $fk_cliente, $fk_libro, $fecha_prestamo, $fecha_devolucion);
 
         if ($stmt->execute()) {
-            header('Location: intprestamo.php'); // Redirigir a la interfaz principal después de un registro exitoso
+            // Actualizar la cantidad del libro
+            $updateQuery = "UPDATE Libros SET cantidad = cantidad - 1 WHERE id = ?";
+            $stmt = $conn->prepare($updateQuery);
+            $stmt->bind_param("i", $fk_libro);
+            $stmt->execute();
+            $stmt->close();
+
+            header('Location: intPrestamo.php'); // Redirigir a la interfaz principal después de un registro exitoso
             exit();
         } else {
             $errorMsg = "Error al registrar el préstamo: " . $stmt->error;
-            include 'forprestamo.php'; // Mostrar el formulario con el mensaje de error
+            header("Location: registrarPrestamo.php?error=error_registro");
+            exit();
         }
+    } else {
+        // La cantidad es 0, redirigir al formulario con un mensaje de error
+        header("Location: registrarPrestamo.php?error=libro_no_disponible");
+        exit();
     }
 
-    $stmt->close();
     $conn->close();
 }
 ?>
