@@ -37,7 +37,7 @@
                 <div class="card-header">
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="card-title m-0"><span>Registro de Docentes</span></h4>
+                            <h4 class="card-title m-0"><span>Registro de Empleados</span></h4>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                 <div class="card-header">
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="card-title m-0"><span>Registro de Alumnos</span></h4>
+                            <h4 class="card-title m-0"><span>Registro de Clientes</span></h4>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                 <div class="card-header">
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="card-title m-0"><span>Carreras</span></h4>
+                            <h4 class="card-title m-0"><span>Registro de Libros</span></h4>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                 <div class="card-header">
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="card-title m-0"><span>Grados</span></h4>
+                            <h4 class="card-title m-0"><span>Registro de Prestamos</span></h4>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                 <div class="card-header">
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="card-title m-0"><span>Materias</span></h4>
+                            <h4 class="card-title m-0"><span>Historial de Prestamos</span></h4>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -138,26 +138,6 @@
         </div>
 
 
-        <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="media">
-                        <div class="media-body">
-                            <h4 class="card-title m-0"><span>Asignar Carrera-Grado</span></h4>
-                            <small class="text-muted"></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress rounded-0">
-                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div style="margin: 6px 6px 6px 80%;" id="divBtnVerCursos4117">
-                    <a href="asigprof.php" class="btn btn-info btn-circle">
-                        <i class="material-icons">ir</i> 
-                    </a>
-                </div>
-            </div>
-        </div>
 
 
     
