@@ -47,7 +47,7 @@
                     </div>
                 </form>
 
-                <form action="interfaz1.php">
+                <form action="intempleados.php">
                     <div class="col-6">
                         <br><button type="submit" class="btn btn-primary btn-block"><i class="fas fa-arrow-left"></i> Regresar</button>
                         <br>

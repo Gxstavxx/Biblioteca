@@ -2,7 +2,7 @@
 include "conexion.php";
 
 // Realizar la consulta SQL para obtener todos los registros
-$query = "SELECT id, nombres, apellidos, edad, direccion, tel, identificacion, cargo  FROM empleados"; // Ajusta según la estructura de tu tabla
+$query = "SELECT id, nombres_cli, apellidos_cli, edad, direccion, tel, identificacion  FROM Clientes"; // Ajusta según la estructura de tu tabla
 $result = $conn->query($query);
 
 
@@ -37,8 +37,8 @@ $result = $conn->query($query);
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center mb-4">Registros de Empleados</h1>
-                <a href="forempleados.php" class="btn btn-block btn-outline-info btn-sm">¿Deseas Registrar un Nuevo Empleado?</a>
+                <h1 class="text-center mb-4">Registros de Clientes</h1>
+                <a href="forclientes.php" class="btn btn-block btn-outline-info btn-sm">¿Deseas Registrar un Nuevo Cliente?</a>
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
@@ -58,7 +58,7 @@ $result = $conn->query($query);
                                     <th scope="col">Direccion</th>
                                     <th scope="col">Telefono</th>
                                     <th scope="col">Identificacion</th>
-                                    <th scope="col">Cargo</th>
+                                
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -69,14 +69,13 @@ $result = $conn->query($query);
                                 ?>
                                     <tr data-nombres="<?php echo $dat->nombres; ?>" data-profesion="<?php echo $dat->profesion; ?>">
                                         <td><?php echo $dat->id; ?></td>
-                                        <td><?php echo $dat->nombres; ?></td>
-                                        <td><?php echo $dat->apellidos; ?></td>
+                                        <td><?php echo $dat->nombres_cli; ?></td>
+                                        <td><?php echo $dat->apellidos_cli; ?></td>
                                         <td><?php echo $dat->edad; ?></td>
                                         <td><?php echo $dat->direccion; ?></td>
                                         <td><?php echo $dat->tel; ?></td>
                                         <td><?php echo $dat->identificacion; ?></td>
-                                        <td><?php echo $dat->cargo; ?></td>
-
+                                    
                                         <td>
                                             <a href="editar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-warning"><i class="fas fa-wrench"></i></a>
                                             <a href="eliminar.php?id=<?php echo $dat->id; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash-alt"></i></a>
